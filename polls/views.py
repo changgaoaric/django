@@ -1,6 +1,9 @@
-from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
-from polls.models import Choice, Question
-def index(request):
-	return HttpResponse("Hello,world,you are at the polls index")
+from django.shortcuts import render    
+from django.template import loader,Context    
+from django.http import HttpResponse    
+from polls.models import BlogPost    
+def archive(request):
+    posts =BlogPost.objects.all()    
+    t =loader.get_template("archive.html")    
+    c =Context({'posts':posts})    
+    return HttpResponse(t.render(c))  
